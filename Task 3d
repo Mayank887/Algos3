@@ -1,0 +1,36 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+
+int main() {
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */   
+    long long k,n;
+    cin>>k>>n;
+    vector<long long> v;
+    for(long long i=0;i<n;i++){
+        long long a;
+        cin>>a;
+        v.push_back(a);
+    }
+    while(v.size()>k){
+        long long min=v[0]+v[1];                          // Merging two adjacent bricks such that the resultant sum is minimum
+        int j=0;
+    for(int i=1;i<n-1;i++){
+        if(v[i]+v[i+1]<min){
+            min=v[i]+v[i+1];
+            j=i;
+        }
+         v.erase(v.begin()+j,v.begin()+j+2);              // Replacing the two bricks by one resultant brick
+            v.insert(v.begin()+j,min);
+        
+    }                                                     // Continue the process till no. of bricks equals the wall size
+        
+        }   
+    long long a=*max_element(v.begin(),v.end());          // Printing the maximum strength from the resultant wall of bricks
+    cout<<a;
+    return 0;
+}
