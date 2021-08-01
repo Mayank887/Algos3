@@ -1,0 +1,40 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+
+int main() {
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */   
+    int n,m;
+    cin>>n>>m;
+    vector<int> v;
+    int s1=0,s2=0;                                    // Create two groups s1 and s2
+                                                      // Initially let all the bricks in s1 and no brick in s2
+    
+    for(int i=0;i<m;i++){
+        int a=0;
+        cin>>a;
+        s1+=a;                                        // s1=sum of strength of all the bricks
+        v.push_back(a);
+    }
+    if(n==1)                                          // If the no. of bricks in the wall is 1 print the sum of strength of all the bricks
+        cout<< s1;                                          
+    else{
+    sort(v.begin(),v.end(),greater<int>());            // Sort the bricks in descending order of strength
+    for(int i=0;i<m;i++){                               
+        if(s1<=s2)                                     // Transferring the bricks from s1 to s2 if sum of strengths in s1 is greater than sum of strength in s2
+        break;                                         // Exiting the loop if s1<=s2
+        if((s1-v[i])>=(s2+v[i])){
+        s1-=v[i];
+        s2+=v[i];}
+        
+    }
+    if(s1<s2)
+        cout<<s1;
+    else
+        cout<<s2;}
+    return 0;
+}
